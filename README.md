@@ -8,3 +8,4 @@
 * User Forum Post
 * User Forum Comment
 * Adding Channel Slug
+* Filter With Archives
