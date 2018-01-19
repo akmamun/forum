@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
@@ -12,7 +13,6 @@ class Thread extends Model
     public function path()
     {
 //        return '/threads/' . $this->id;
-
         return "/threads/{$this->channel->slug}/{$this->id}";
     }
 
@@ -38,6 +38,21 @@ class Thread extends Model
     public function addReply($reply)
     {
         $this->replies()->create($reply);
+    }
+
+
+    public function scopeFilter($query, $filters)
+    {
+        if (isset($filters['month'])) {
+
+            $query->whereMonth('created_at', Carbon::parse($filters['month'])->month);
+        }
+
+        if (isset($filters['year'])) {
+
+            $query->whereYear('created_at', $filters['year']);
+        }
+
     }
 
 

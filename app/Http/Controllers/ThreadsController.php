@@ -19,18 +19,28 @@ class ThreadsController extends Controller
 
     public function index(Channel $channel)
     {
+
        if ($channel->exists)
        {
            $threads = $channel->threads()->latest()->get();
+           dd($channel);
 
        }
        else
        {
-           $threads = Thread::latest()->get();
+           $threads = Thread::latest()
+               ->filter(request()->only(['month', 'year']))
+               ->get();
+
+           $archives = Thread::selectRaw('year (created_at) year, monthname(created_at) month , count(*) published')
+               ->groupBy('year', 'month')
+               ->orderByRaw('min(created_at)desc')
+               ->get()
+               ->toArray();
        }
 
+        return view('threads.index', compact('threads','archives'));
 
-            return view('threads.index', compact('threads'));
     }
 
 

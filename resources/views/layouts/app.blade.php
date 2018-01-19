@@ -39,6 +39,7 @@
                 <ul class="nav navbar-nav">
                     &nbsp;<li><a href="{{route('threads.index')}}">All Threads</a></li>
                     <li><a href="{{route('threads.create')}}">Create Thread</a></li>
+
                     {{--@foreach(App\Channel::all() as $channel)--}}
                     {{--<option value="{{$channel->id}}">{{$channel->name}}</option>--}}
                     {{--@endforeach--}}

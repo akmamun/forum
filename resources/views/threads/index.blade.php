@@ -21,6 +21,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+
+                <h4>Archives</h4>
+                <ol class="list-unstyled">
+                    @foreach($archives as $stats)
+                        <li>
+                            <a href="{{$thread->path()}}/?month={{$stats['month']}}&year={{$stats['year']}}">
+                                {{$stats['month'] . '' . $stats['year']}}
+                            </a>
+                        </li>
+                        @endforeach
+                </ol>
+            </div>
         </div>
     </div>
 @endsection
