@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Http\Resources\ThreadsCollection;
+use App\Http\Resources\ThreadsResource;
 use App\Thread;
 use Illuminate\Http\Request;
 //use Laravel\Scout\Searchable;
@@ -92,6 +94,7 @@ class ThreadsController extends Controller
 
     public function show($channelId, Thread $thread)
     {
+
         return view('threads.show', compact('thread'));
     }
 
@@ -116,4 +119,15 @@ class ThreadsController extends Controller
     {
         //
     }
+
+    public function apiindex()
+    {
+        return ThreadsCollection::collection(Thread::all());
+    }
+
+    public function apishow($channelId, Thread $thread)
+    {
+        return new ThreadsResource($thread);
+    }
+
 }
