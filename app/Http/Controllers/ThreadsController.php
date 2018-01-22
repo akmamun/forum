@@ -5,10 +5,24 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Thread;
 use Illuminate\Http\Request;
+//use Laravel\Scout\Searchable;
+
 
 class ThreadsController extends Controller
 {
+//    use Searchable;
+//    public function searchableAs()
+//    {
+//        return 'title';
+//    }
 
+//
+//    public function search()
+//    {
+//        $threads = Thread::search()->get(); return $threads;
+//
+//        return view('threads.search', compact('threads'));
+//    }
 
     public function __construct()
     {
