@@ -21,7 +21,6 @@ class ThreadsController extends Controller
 
     public function index(Channel $channel)
     {
-        return ThreadsCollection::collection(Thread::all());
 
        if ($channel->exists)
        {
@@ -81,7 +80,7 @@ class ThreadsController extends Controller
 
     public function show($channelId, Thread $thread)
     {
-        return new ThreadsResource($thread);
+
         return view('threads.show', compact('thread'));
     }
 
@@ -106,4 +105,15 @@ class ThreadsController extends Controller
     {
         //
     }
+
+    public function apiindex()
+    {
+        return ThreadsCollection::collection(Thread::all());
+    }
+
+    public function apishow($channelId, Thread $thread)
+    {
+        return new ThreadsResource($thread);
+    }
+
 }

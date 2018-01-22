@@ -17,13 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/threads','ThreadsController');
+Route::get('/threads','ThreadsController@apiindex');
 
 
 //group route
 Route::group(['prefix'=>'threads'], function ()
 {
-    Route::get('/{channel}/{thread}/' , 'ThreadsController@show');
+    Route::get('/{channel}/{thread}/' , 'ThreadsController@apishow');
 //    Route::post('/{channel}/{thread}/replies', 'RepliesController@store');
 
 });
