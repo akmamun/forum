@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/threads','ThreadsController');
+
+
+//group route
+Route::group(['prefix'=>'threads'], function ()
+{
+    Route::get('/{channel}/{thread}/' , 'ThreadsController@show');
+//    Route::post('/{channel}/{thread}/replies', 'RepliesController@store');
+
+});

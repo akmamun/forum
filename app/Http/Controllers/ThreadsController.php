@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Http\Resources\ThreadsCollection;
+use App\Http\Resources\ThreadsResource;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -19,6 +21,7 @@ class ThreadsController extends Controller
 
     public function index(Channel $channel)
     {
+        return ThreadsCollection::collection(Thread::all());
 
        if ($channel->exists)
        {
@@ -78,6 +81,7 @@ class ThreadsController extends Controller
 
     public function show($channelId, Thread $thread)
     {
+        return new ThreadsResource($thread);
         return view('threads.show', compact('thread'));
     }
 

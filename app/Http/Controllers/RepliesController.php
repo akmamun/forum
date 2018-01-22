@@ -46,7 +46,7 @@ class RepliesController extends Controller
 
     public function show(Reply $reply)
     {
-        //
+
     }
 
 
