@@ -39,7 +39,6 @@ class ThreadsController extends Controller
        if ($channel->exists)
        {
            $threads = $channel->threads()->latest()->get();
-           dd($channel);
 
        }
        else
@@ -48,12 +47,14 @@ class ThreadsController extends Controller
                ->filter(request()->only(['month', 'year']))
                ->get();
 
-           $archives = Thread::selectRaw('year (created_at) year, monthname(created_at) month , count(*) published')
-               ->groupBy('year', 'month')
-               ->orderByRaw('min(created_at)desc')
-               ->get()
-               ->toArray();
        }
+
+        $archives = Thread::selectRaw('year (created_at) year, monthname(created_at) month , count(*) published')
+            ->groupBy('year', 'month')
+            ->orderByRaw('min(created_at)desc')
+            ->get()
+            ->toArray();
+
 
         return view('threads.index', compact('threads','archives'));
 

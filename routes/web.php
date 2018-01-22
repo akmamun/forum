@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Jobs\SendEmailJob;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,4 +32,12 @@ Route::get('threads/{channel}' , 'ThreadsController@index');
 Route::get('threads/{channel}/{thread}/' , 'ThreadsController@show');
 Route::post('threads' , 'ThreadsController@store')->name('threads.store');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
+
+Route::get('sendemail',function()
+{
+    SendEmailJob::dispatch()
+        ->delay(now()->addSecond(2));
+   return "send ";
+
+});
 
