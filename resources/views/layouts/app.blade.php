@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -50,6 +52,18 @@
                             @foreach($channels as $channel)
                             <li><a href="/threads/{{$channel->slug}}">{{$channel->name}}</a></li>
                             @endforeach
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            </a>
+                        <ul class="dropdown-menu">
+                            <li>Notify</li>
                         </ul>
                     </li>
                 </ul>

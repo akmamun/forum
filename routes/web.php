@@ -11,6 +11,8 @@
 |
 */
 use App\Jobs\SendEmailJob;
+use App\User;
+use App\Notifications\TaskCompleted;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +40,13 @@ Route::get('sendemail',function()
     SendEmailJob::dispatch()
         ->delay(now()->addSecond(2));
    return "send ";
+
+});
+
+Route::get('/', function () {
+    $when = now()->addSecond(5);
+
+        User::find(1)->notify((new TaskCompleted())->delay($when));
 
 });
 
