@@ -13,7 +13,6 @@
 use App\Jobs\SendEmailJob;
 use App\User;
 use App\Notifications\TaskCompleted;
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
+
 
 Route::get('threads' , 'ThreadsController@index')->name('threads.index');
 
@@ -35,6 +37,7 @@ Route::get('threads/{channel}/{thread}/' , 'ThreadsController@show');
 Route::post('threads' , 'ThreadsController@store')->name('threads.store');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
 
+
 Route::get('sendemail',function()
 {
     SendEmailJob::dispatch()
@@ -43,10 +46,10 @@ Route::get('sendemail',function()
 
 });
 
-Route::get('/', function () {
-    $when = now()->addSecond(5);
-
-        User::find(1)->notify((new TaskCompleted())->delay($when));
-
-});
+//Route::get('/', function () {
+//    $when = now()->addSecond(5);
+//
+//        User::find(1)->notify((new TaskCompleted())->delay($when));
+//
+//});
 
