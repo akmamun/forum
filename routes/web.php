@@ -13,6 +13,7 @@
 use App\Jobs\SendEmailJob;
 use App\User;
 use App\Notifications\TaskCompleted;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,11 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
-
-
 Route::get('threads' , 'ThreadsController@index')->name('threads.index');
 
 //Route::get('threads/search/{searchkey}' , 'ThreadsController@search')->name('threads.search');
@@ -37,7 +35,6 @@ Route::get('threads/{channel}/{thread}/' , 'ThreadsController@show');
 Route::post('threads' , 'ThreadsController@store')->name('threads.store');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
 
-
 Route::get('sendemail',function()
 {
     SendEmailJob::dispatch()
@@ -46,10 +43,22 @@ Route::get('sendemail',function()
 
 });
 
-//Route::get('/', function () {
-//    $when = now()->addSecond(5);
-//
-//        User::find(1)->notify((new TaskCompleted())->delay($when));
-//
-//});
 
+
+
+
+
+
+Route::get('/notification', function () {
+    $when = now()->addSecond(5);
+    User::find(1)->notify((new TaskCompleted)->delay($when));
+
+    //    Notification::route('mail', 'taylor@laravel.com')
+//        ->notify(new TaskCompleted());
+    return redirect()->back();
+});
+
+Route::get('/markasread', function () {
+  auth()->user()->unreadNotifications->markAsRead();
+  return redirect()->back();
+})->name('markread');

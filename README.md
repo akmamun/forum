@@ -11,6 +11,7 @@
 * Filter With Archives
 * Adding RestFull Api
 * Send Mail with Queue
+* Adding Notification
 
 After these steps the user can still login without verifying.
 

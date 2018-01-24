@@ -61,9 +61,22 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">
                             <i class="fa fa-bell"></i>
+                            @if(Auth::user()->unreadnotifications->count())
+                            <span class="badge badge-light">{{Auth::user()->unreadnotifications->count()}}</span>
+                           @endif
                             </a>
                         <ul class="dropdown-menu">
-                            <li>Notify</li>
+                            @if(Auth::user()->unreadnotifications->count())
+                                <li><a href="{{route('markread')}}">Mark as Read</a></li>
+                             @else
+                                <li>No New Notification</li>
+
+                            @endif
+
+
+                        @foreach(Auth::user()->unreadNotifications as $notification)
+                                <li><a href="#">{{$notification->data['data']}}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                 </ul>
